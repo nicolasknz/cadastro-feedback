@@ -26,7 +26,6 @@ const Authenticator = () => {
       })
       .catch(() => {
         setAuthentication(false);
-        history.push('/');
       });
   });
 
@@ -37,10 +36,10 @@ const Authenticator = () => {
   if (isAutheticated === false) {
     return (
       <Switch>
-        <Route path="new-account">
+        <Route path="/new-account">
           <div>new account page</div>
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <LoginForm setAuthentication={setAuthentication} />
         </Route>
       </Switch>
@@ -49,7 +48,7 @@ const Authenticator = () => {
 
   return (
     <Switch>
-      <Route path="account-list">
+      <Route path="/account-list">
         <div>account list page</div>
       </Route>
     </Switch>
