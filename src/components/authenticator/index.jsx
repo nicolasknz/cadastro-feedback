@@ -22,13 +22,12 @@ const Authenticator = () => {
       })
       .then(() => {
         setAuthentication(true);
-        history.push('/account-list');
       })
       .catch(() => {
         setAuthentication(false);
         history.push('/');
       });
-  });
+  }, [history, setAuthentication]);
 
   if (isAutheticated === undefined) {
     return <div>Loading . . . (inserir animaçao)</div>;
