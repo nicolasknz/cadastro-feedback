@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
+import UserForm from '../user-form'
 import LoginForm from '../login-form';
 
 const Authenticator = () => {
@@ -36,7 +37,7 @@ const Authenticator = () => {
     return (
       <Switch>
         <Route path="/new-account">
-          <div>new account page</div>
+          <UserForm />
         </Route>
         <Route exact path="/">
           <LoginForm setAuthentication={setAuthentication} />
