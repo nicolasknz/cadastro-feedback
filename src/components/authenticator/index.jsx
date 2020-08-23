@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
-import Users from '../../pages/users'
-import UserForm from '../user-form'
+import FeedbackList from '../../pages/feedback-list';
+import Users from '../../pages/users';
 import LoginForm from '../login-form';
+import UserForm from '../user-form';
 
 const Authenticator = () => {
   const [isAutheticated, setAuthentication] = useState(undefined);
@@ -49,11 +50,12 @@ const Authenticator = () => {
 
   return (
     <Switch>
-      <Route path="/users">
+      <Route exact path="/users">
         <Users />
       </Route>
-
-
+      <Route exact path="/users/feedbacks/:id">
+        <FeedbackList />
+      </Route>
     </Switch>
   );
 };
