@@ -24,9 +24,9 @@ const LoginForm = ({ setAuthentication }) => {
       .then((res) => {
         console.log(res);
         setToken(res.auth_token);
-        localStorage.setItem('AuthToken', res.auth_token);
+        localStorage.setItem('AuthToken', res.data.auth_token);
         setAuthentication(true);
-        history.push('/new-account');
+        history.push('/users');
       })
       .catch(({ response }) => {
         console.log(response);
