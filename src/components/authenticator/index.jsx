@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
+import Users from '../../pages/users'
 import UserForm from '../user-form'
 import LoginForm from '../login-form';
 
@@ -48,9 +49,11 @@ const Authenticator = () => {
 
   return (
     <Switch>
-      <Route path="/account-list">
-        <div>account list page</div>
+      <Route path="/users">
+        <Users />
       </Route>
+
+
     </Switch>
   );
 };
