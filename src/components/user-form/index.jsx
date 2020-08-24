@@ -1,6 +1,7 @@
 import { Form, Input, Button } from 'antd';
 import axios from 'axios';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const layout = {
   labelCol: { span: 8 },
@@ -11,8 +12,10 @@ const tailLayout = {
 };
 
 const UserForm = () => {
+  const history = useHistory()
   const onFinish = (values) => {
     console.log('Success:', values);
+    history.push("/")
 
     axios
       .post('https://ka-users-api.herokuapp.com/users', {
