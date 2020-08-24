@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import FeedbackList from '../../pages/feedback-list';
+import NewFeedback from '../../pages/new-feedback';
 import Users from '../../pages/users';
 import LoginForm from '../login-form';
 import UserForm from '../user-form';
@@ -50,11 +51,17 @@ const Authenticator = () => {
 
   return (
     <Switch>
+      <Route exact path="/">
+        <LoginForm setAuthentication={setAuthentication} />
+      </Route>
       <Route exact path="/users">
         <Users />
       </Route>
       <Route exact path="/users/feedbacks/:id">
         <FeedbackList />
+      </Route>
+      <Route exact path="/users/feedbacks/:id/new-feedback">
+        <NewFeedback />
       </Route>
     </Switch>
   );
