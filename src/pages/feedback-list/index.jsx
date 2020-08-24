@@ -1,12 +1,13 @@
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const FeedbackList = () => {
   const token = localStorage.getItem('AuthToken');
   const [feedback, setFeedback] = useState([]);
   const params = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -48,7 +49,11 @@ const FeedbackList = () => {
     <>
       <h2 style={{ color: 'white' }}>Feedbacks</h2>
       <Table size="default" columns={columns} dataSource={feedback} pagination={{ pageSize: 10 }} />
-      ,
+      <Button
+        type="primary"
+        onClick={() => history.push(`/users/feedbacks/${params.id}/new-feedback`)}>
+        New Feedback
+      </Button>
     </>
   );
 };
