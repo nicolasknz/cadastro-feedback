@@ -1,42 +1,56 @@
-import React from 'react'
-import Logout from '../logout'
-import { Menu } from 'antd'
-import { Link } from 'react-router-dom'
-import './index.css'
+import { UsergroupAddOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+import React from 'react';
+import { FaUserGraduate, FaUserPlus } from 'react-icons/fa';
+import { RiLoginBoxLine } from 'react-icons/ri';
+import { useLocation, Link } from 'react-router-dom';
 
-const Header = ({ isAutheticated }) => {
-    return (
-        <div className="menu">
-            {
-                isAutheticated ?
-                    (
-                        <Menu mode="horizontal">
-                            <Menu.Item key="mail" >
-                                <Link to="/users">Alunos</Link>
-                            </Menu.Item>
-                            <Menu.Item key="app" >
-                                <Logout />
-                            </Menu.Item>
-                        </Menu>
-                    )
-                    :
-                    (
-                        <Menu mode="horizontal">
-                            <Menu.Item key="mail" >
-                                <Link to="/new-account">Novo Usuário</Link>
-                            </Menu.Item>
-                            <Menu.Item key="app" >
-                                <Link to="/">Login</Link>
-                            </Menu.Item>
-                        </Menu>
-                    )
+import Logout from '../logout';
+import './index.css';
 
-            }
+const Header = ({ isAutheticated, pathname }) => {
+  const location = useLocation();
+  console.log('PATHNAME HEADER: ', pathname);
+  const dynamicClassName = '';
 
+  /* pathname === '/' ||
+    pathname === '/new-account' ||
+    pathname === `/users/feedbacks/:id/new-feedback`
+    ? (dynamicClassName = 'menu-login')
+    : (dynamicClassName = 'menu'); */
 
-        </div>
-    )
-}
+  return (
+    <div className="menu">
+      {isAutheticated ? (
+        <Menu mode="horizontal" selectedKeys={[location.pathname]}>
+          <Menu.Item key="/users">
+            <Link to="/users">
+              <FaUserGraduate size={18} />
+              &nbsp; Alunos
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/">
+            <Logout />
+          </Menu.Item>
+        </Menu>
+      ) : (
+          <Menu mode="horizontal" selectedKeys={[location.pathname]}>
+            <Menu.Item key="/new-account">
+              <Link to="/new-account">
+                <FaUserPlus size={18} />
+              &nbsp; Novo Usuário
+            </Link>
+            </Menu.Item>
+            <Menu.Item key="/">
+              <Link to="/">
+                <RiLoginBoxLine size={18} />
+              &nbsp;Login
+            </Link>
+            </Menu.Item>
+          </Menu>
+        )}
+    </div>
+  );
+};
 
-
-export default Header
+export default Header;
