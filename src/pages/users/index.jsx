@@ -1,7 +1,11 @@
 import { Table } from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { VscFeedback } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
+import { Spring } from 'react-spring/renderprops';
+
+import { LoginContainer } from '../../styled';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -41,7 +45,11 @@ const Users = () => {
       name: item.name,
       user: item.user,
       email: item.email,
-      feedbacks: <Link to={`/users/feedbacks/${item.id}`}>Go to Feedback</Link>,
+      feedbacks: (
+        <Link to={`/users/feedbacks/${item.id}`}>
+          <VscFeedback size={25} />
+        </Link>
+      ),
     };
   });
 
@@ -56,10 +64,21 @@ const Users = () => {
   }, []);
 
   return (
-    <>
-      <h2 style={{ color: 'white' }}>Alunos</h2>
-      <Table size="default" columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />,
-    </>
+    <Spring from={{ opacity: 0, marginLeft: -500 }} to={{ opacity: 1, marginLeft: 0 }}>
+      {(props) => (
+        <LoginContainer>
+          <div style={props}>
+            <h1 style={{ color: 'white' }}>Alunos</h1>
+            <Table
+              size="default"
+              columns={columns}
+              dataSource={data}
+              pagination={{ pageSize: 10 }}
+            />
+          </div>
+        </LoginContainer>
+      )}
+    </Spring>
   );
 };
 

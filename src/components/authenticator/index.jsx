@@ -1,3 +1,4 @@
+import { LoadingOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
@@ -5,14 +6,14 @@ import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import FeedbackList from '../../pages/feedback-list';
 import NewFeedback from '../../pages/new-feedback';
 import Users from '../../pages/users';
+import Header from '../header';
 import LoginForm from '../login-form';
 import UserForm from '../user-form';
-import Header from '../header'
 
 const Authenticator = () => {
   const [isAutheticated, setAuthentication] = useState(false);
   const history = useHistory();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('AuthToken');
@@ -35,13 +36,13 @@ const Authenticator = () => {
   }, [history, setAuthentication, location]);
 
   if (isAutheticated === undefined) {
-    return <div>Loading . . . (inserir animaçao)</div>;
+    return <LoadingOutlined />;
   }
 
   if (isAutheticated === false) {
     return (
       <>
-        <Header isAutheticated={isAutheticated} />
+        <Header isAutheticated={isAutheticated} pathname={location.pathname} />
         <Switch>
           <Route path="/new-account">
             <UserForm />
@@ -56,7 +57,8 @@ const Authenticator = () => {
 
   return (
     <>
-      <Header isAutheticated={isAutheticated} />
+      <Header isAutheticated={isAutheticated} pathname={location.pathname} />
+
       <Switch>
         <Route exact path="/">
           <LoginForm setAuthentication={setAuthentication} />

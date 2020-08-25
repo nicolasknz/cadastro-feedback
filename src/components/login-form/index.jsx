@@ -3,6 +3,9 @@ import 'antd/dist/antd.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Spring } from 'react-spring/renderprops';
+
+import { LoginContainer, FormContainer } from '../../styled';
 
 const layout = {
   labelCol: { span: 8 },
@@ -43,28 +46,39 @@ const LoginForm = ({ setAuthentication }) => {
   };
 
   return (
-    <Form {...layout} name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
-      <Form.Item
-        label="Usuario"
-        name="user"
-        rules={[{ required: true, message: 'Please input your username!' }]}>
-        <Input />
-      </Form.Item>
+    <Spring from={{ opacity: 0, marginLeft: -500 }} to={{ opacity: 1, marginLeft: 0 }}>
+      {(props) => (
+        <div style={props}>
+          <LoginContainer>
+            <FormContainer>
+              <div className="Login-Kenzie-Logo" />
+              <Form {...layout} name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
+                <Form.Item
+                  label="Usuario"
+                  name="user"
+                  rules={[{ required: true, message: 'Please input your username!' }]}>
+                  <Input />
+                </Form.Item>
 
-      <Form.Item
-        label="Senha"
-        name="password"
-        extra={requestError && <div>{requestError}</div>}
-        rules={[{ required: true, message: 'Please input your password!' }]}>
-        <Input.Password />
-      </Form.Item>
+                <Form.Item
+                  label="Senha"
+                  name="password"
+                  extra={requestError && <div>{requestError}</div>}
+                  rules={[{ required: true, message: 'Please input your password!' }]}>
+                  <Input.Password />
+                </Form.Item>
 
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+                <Form.Item {...tailLayout}>
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+            </FormContainer>
+          </LoginContainer>
+        </div>
+      )}
+    </Spring>
   );
 };
 

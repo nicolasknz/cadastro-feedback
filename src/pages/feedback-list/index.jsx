@@ -1,7 +1,11 @@
 import { Table, Button } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { RiChatNewLine } from 'react-icons/ri';
 import { useParams, useHistory } from 'react-router-dom';
+import { Spring } from 'react-spring/renderprops';
+
+import { LoginContainer } from '../../styled';
 
 const FeedbackList = () => {
   const token = localStorage.getItem('AuthToken');
@@ -46,15 +50,27 @@ const FeedbackList = () => {
   ];
 
   return (
-    <>
-      <h2 style={{ color: 'white' }}>Feedbacks</h2>
-      <Table size="default" columns={columns} dataSource={feedback} pagination={{ pageSize: 10 }} />
-      <Button
-        type="primary"
-        onClick={() => history.push(`/users/feedbacks/${params.id}/new-feedback`)}>
-        New Feedback
-      </Button>
-    </>
+    <Spring from={{ opacity: 0, marginLeft: -500 }} to={{ opacity: 1, marginLeft: 0 }}>
+      {(props) => (
+        <LoginContainer>
+          <div style={props}>
+            <h1 style={{ color: 'white' }}>Feedbacks</h1>
+            <Table
+              size="default"
+              columns={columns}
+              dataSource={feedback}
+              pagination={{ pageSize: 10 }}
+            />
+            <Button
+              type="primary"
+              onClick={() => history.push(`/users/feedbacks/${params.id}/new-feedback`)}>
+              New Feedback &nbsp;
+              <RiChatNewLine size={18} />
+            </Button>
+          </div>
+        </LoginContainer>
+      )}
+    </Spring>
   );
 };
 

@@ -1,7 +1,11 @@
-import { Form, Input, Button } from 'antd';
+import { Form, Button } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { Spring } from 'react-spring/renderprops';
+import styled from 'styled-components';
+
+import StyledInput from '../../styled/styled-input';
 
 const layout = {
   labelCol: { span: 8 },
@@ -43,38 +47,63 @@ const NewFeedback = () => {
   };
 
   return (
-    <div className="outer-container">
-      <h2>Novo Feedback</h2>
-      <Form
-        className="form"
-        {...layout}
-        name="basic"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}>
-        <Form.Item label="Nome" name="name" rules={[{}]}>
-          <Input placeholder="Nome" />
-        </Form.Item>
+    <Spring from={{ opacity: 0, marginLeft: -500 }} to={{ opacity: 1, marginLeft: 0 }}>
+      {(props) => (
+        <Container>
+          <div style={props}>
+            <FormContainer>
+              <h2 style={{ color: 'black' }}>Novo Feedback</h2>
+              <Form
+                className="form"
+                {...layout}
+                name="basic"
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}>
+                <Form.Item name="name" rules={[{}]}>
+                  <StyledInput placeholder="Nome" />
+                </Form.Item>
 
-        <Form.Item label="Comentario" name="comment" rules={[{}]}>
-          <Input placeholder="Comentario" />
-        </Form.Item>
+                <Form.Item name="comment" rules={[{}]}>
+                  <StyledInput placeholder="Comentario" />
+                </Form.Item>
 
-        <Form.Item label="Email" name="email" rules={[{ type: 'email', message: 'Invalid email' }]}>
-          <Input placeholder="Email" />
-        </Form.Item>
+                <Form.Item name="email" rules={[{ type: 'email', message: 'Invalid email' }]}>
+                  <StyledInput placeholder="Email" />
+                </Form.Item>
 
-        <Form.Item label="Grade" name="grade" rules={[]}>
-          <Input placeholder="Grade" />
-        </Form.Item>
+                <Form.Item name="grade" rules={[]}>
+                  <StyledInput placeholder="Grade" />
+                </Form.Item>
 
-        <Form.Item className="btn-form" {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Enviar
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+                <Form.Item className="btn-form" {...tailLayout}>
+                  <Button type="primary" htmlType="submit">
+                    Enviar
+                  </Button>
+                </Form.Item>
+              </Form>
+            </FormContainer>
+          </div>
+        </Container>
+      )}
+    </Spring>
   );
 };
 
 export default NewFeedback;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  width: 100%;
+  min-height: 100vh;
+  background: #282c34;
+  padding-bottom: 100px;
+`;
+
+const FormContainer = styled.div`
+  background: #fff;
+  padding: 60px;
+  border-radius: 20px;
+  margin-bottom: 200px;
+`;
