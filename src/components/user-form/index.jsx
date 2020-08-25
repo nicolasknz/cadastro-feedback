@@ -51,6 +51,7 @@ const UserForm = () => {
               <Form.Item
                 name="name"
                 rules={[
+                  { pattern: new RegExp(/^((\b[A-zÀ-ú']{2,40}\b)\s*){2,}$/), message: "Invalid name" },
                   { min: 7, message: 'Must be at least 7 characters' },
                   { required: true, message: 'Please input your name!' },
                 ]}>
@@ -67,7 +68,7 @@ const UserForm = () => {
                 name="email"
                 rules={[
                   { type: 'email', message: 'Invalid email' },
-                  { required: true, message: 'Please input your username!' },
+                  { required: true, message: 'Please input your email!' },
                 ]}>
                 <StyledInput placeholder="Email" />
               </Form.Item>
