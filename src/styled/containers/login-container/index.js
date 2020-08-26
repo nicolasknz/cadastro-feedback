@@ -5,7 +5,7 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #282c34;
+  background: #153169;
 `;
 
 export default LoginContainer;

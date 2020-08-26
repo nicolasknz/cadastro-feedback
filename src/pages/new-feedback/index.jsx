@@ -52,7 +52,7 @@ const NewFeedback = () => {
         <Container>
           <div style={props}>
             <FormContainer>
-              <h2 style={{ color: 'black' }}>Novo Feedback</h2>
+              <h1 style={{ color: 'black' }}>Novo Feedback</h1>
               <Form
                 className="form"
                 {...layout}
@@ -95,15 +95,13 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  width: 100%;
   min-height: 100vh;
-  background: #282c34;
-  padding-bottom: 100px;
+  background: #153169;
 `;
 
 const FormContainer = styled.div`
   background: #fff;
-  padding: 60px;
   border-radius: 20px;
+  padding: 60px;
   margin-bottom: 200px;
 `;

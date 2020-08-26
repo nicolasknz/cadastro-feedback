@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { RiChatNewLine } from 'react-icons/ri';
 import { useParams, useHistory } from 'react-router-dom';
 import { Spring } from 'react-spring/renderprops';
+import styled from 'styled-components';
 
 import { LoginContainer } from '../../styled';
 
@@ -54,19 +55,21 @@ const FeedbackList = () => {
       {(props) => (
         <LoginContainer>
           <div style={props}>
-            <h1 style={{ color: 'white' }}>Feedbacks</h1>
+            <HeaderContainer>
+              <h1 style={{ color: 'white' }}>Feedbacks</h1>
+              <Button
+                type="primary"
+                onClick={() => history.push(`/users/feedbacks/${params.id}/new-feedback`)}>
+                New Feedback &nbsp;
+                <RiChatNewLine size={18} />
+              </Button>
+            </HeaderContainer>
             <Table
               size="default"
               columns={columns}
               dataSource={feedback}
               pagination={{ pageSize: 10 }}
             />
-            <Button
-              type="primary"
-              onClick={() => history.push(`/users/feedbacks/${params.id}/new-feedback`)}>
-              New Feedback &nbsp;
-              <RiChatNewLine size={18} />
-            </Button>
           </div>
         </LoginContainer>
       )}
@@ -75,3 +78,8 @@ const FeedbackList = () => {
 };
 
 export default FeedbackList;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

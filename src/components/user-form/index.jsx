@@ -40,76 +40,81 @@ const UserForm = () => {
     <Spring from={{ opacity: 0, marginLeft: -500 }} to={{ opacity: 1, marginLeft: 0 }}>
       {(props) => (
         <Container>
-          <FormContainer>
-            <h1>Cadastro</h1>
-            <Form
-              className="form"
-              {...layout}
-              name="basic"
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}>
-              <Form.Item
-                name="name"
-                rules={[
-                  { pattern: new RegExp(/^((\b[A-zÀ-ú']{2,40}\b)\s*){2,}$/), message: "Invalid name" },
-                  { min: 7, message: 'Must be at least 7 characters' },
-                  { required: true, message: 'Please input your name!' },
-                ]}>
-                <StyledInput placeholder="Nome" />
-              </Form.Item>
-
-              <Form.Item
-                name="user"
-                rules={[{ required: true, message: 'Please input your username!' }]}>
-                <StyledInput placeholder="Usuário" />
-              </Form.Item>
-
-              <Form.Item
-                name="email"
-                rules={[
-                  { type: 'email', message: 'Invalid email' },
-                  { required: true, message: 'Please input your email!' },
-                ]}>
-                <StyledInput placeholder="Email" />
-              </Form.Item>
-
-              <Form.Item
-                name="password"
-                rules={[
-                  { min: 6, message: 'Must be at least 6 characters' },
-                  { pattern: '(?=.*[!@#$%^&*])', message: 'Must have special character' },
-                  { required: true, message: 'Please input your password!' },
-                ]}>
-                <StyledInput.Password placeholder="Senha" />
-              </Form.Item>
-
-              <Form.Item
-                name="password_confirmation"
-                dependencies={['password']}
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please confirm your password!',
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                      if (!value || getFieldValue('password') === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject('The two passwords that you entered do not match!');
+          <div style={props}>
+            <FormContainer>
+              <h1>Cadastro</h1>
+              <Form
+                className="form"
+                {...layout}
+                name="basic"
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}>
+                <Form.Item
+                  name="name"
+                  rules={[
+                    {
+                      pattern: new RegExp(/^((\b[A-zÀ-ú']{2,40}\b)\s*){2,}$/),
+                      message: 'Invalid name',
                     },
-                  }),
-                ]}>
-                <StyledInput.Password placeholder="Confirmar senha" />
-              </Form.Item>
+                    { min: 7, message: 'Must be at least 7 characters' },
+                    { required: true, message: 'Please input your name!' },
+                  ]}>
+                  <StyledInput placeholder="Nome" />
+                </Form.Item>
 
-              <Form.Item className="btn-form" {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                  Enviar
-                </Button>
-              </Form.Item>
-            </Form>
-          </FormContainer>
+                <Form.Item
+                  name="user"
+                  rules={[{ required: true, message: 'Please input your username!' }]}>
+                  <StyledInput placeholder="Usuário" />
+                </Form.Item>
+
+                <Form.Item
+                  name="email"
+                  rules={[
+                    { type: 'email', message: 'Invalid email' },
+                    { required: true, message: 'Please input your email!' },
+                  ]}>
+                  <StyledInput placeholder="Email" />
+                </Form.Item>
+
+                <Form.Item
+                  name="password"
+                  rules={[
+                    { min: 6, message: 'Must be at least 6 characters' },
+                    { pattern: '(?=.*[!@#$%^&*])', message: 'Must have special character' },
+                    { required: true, message: 'Please input your password!' },
+                  ]}>
+                  <StyledInput.Password placeholder="Senha" />
+                </Form.Item>
+
+                <Form.Item
+                  name="password_confirmation"
+                  dependencies={['password']}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please confirm your password!',
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        if (!value || getFieldValue('password') === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject('The two passwords that you entered do not match!');
+                      },
+                    }),
+                  ]}>
+                  <StyledInput.Password placeholder="Confirmar senha" />
+                </Form.Item>
+
+                <Form.Item className="btn-form" {...tailLayout}>
+                  <Button type="primary" htmlType="submit">
+                    Enviar
+                  </Button>
+                </Form.Item>
+              </Form>
+            </FormContainer>
+          </div>
         </Container>
       )}
     </Spring>
@@ -122,10 +127,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  width: 100%;
-  min-height: 100vh;
-  background: #282c34;
-  padding-bottom: 100px;
+  background: #153169;
 `;
 
 const FormContainer = styled.div`

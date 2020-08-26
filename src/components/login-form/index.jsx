@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Spring } from 'react-spring/renderprops';
 
 import { LoginContainer, FormContainer } from '../../styled';
+import StyledInput from '../../styled/styled-input';
 
 const layout = {
   labelCol: { span: 8 },
@@ -53,24 +54,19 @@ const LoginForm = ({ setAuthentication }) => {
             <FormContainer>
               <div className="Login-Kenzie-Logo" />
               <Form {...layout} name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
-                <Form.Item
-                  label="Usuario"
-                  name="user"
-                  rules={[{ required: true, message: 'Please input your username!' }]}>
-                  <Input />
+                <Form.Item name="user">
+                  <StyledInput placeholder="Usuário" />
                 </Form.Item>
 
                 <Form.Item
-                  label="Senha"
                   name="password"
-                  extra={requestError && <div>{requestError}</div>}
-                  rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input.Password />
+                  extra={requestError && <div style={{ color: 'red' }}>{requestError}</div>}>
+                  <StyledInput.Password placeholder="Senha" />
                 </Form.Item>
 
                 <Form.Item {...tailLayout}>
                   <Button type="primary" htmlType="submit">
-                    Submit
+                    Entrar
                   </Button>
                 </Form.Item>
               </Form>
