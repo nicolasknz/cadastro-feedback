@@ -5,6 +5,13 @@ const FormContainer = styled.div`
   background: #fff;
   border-radius: 25px;
   padding: 50px 20px 20px 20px;
+
+  @media screen and (min-width: 800px) {
+    background: #fff;
+    border-radius: 20px;
+    padding: 60px;
+    margin-bottom: 200px;
+  }
 `;
 
 export default FormContainer;

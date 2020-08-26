@@ -15,12 +15,12 @@ const Users = () => {
     {
       title: 'id',
       dataIndex: 'id',
-      width: 100,
+      width: 50,
     },
     {
       title: 'Name',
       dataIndex: 'name',
-      width: 500,
+      width: 200,
     },
     {
       title: 'User',
@@ -34,24 +34,15 @@ const Users = () => {
     },
     {
       title: 'Feedbacks',
-      dataIndex: 'feedbacks',
-      width: 250,
+      render: (record) => {
+        return (
+          <Link to={`/users/feedbacks/${record.id}`}>
+            <VscFeedback size={25} />
+          </Link>
+        );
+      },
     },
   ];
-
-  const data = users.map((item) => {
-    return {
-      id: item.id,
-      name: item.name,
-      user: item.user,
-      email: item.email,
-      feedbacks: (
-        <Link to={`/users/feedbacks/${item.id}`}>
-          <VscFeedback size={25} />
-        </Link>
-      ),
-    };
-  });
 
   useEffect(() => {
     axios
@@ -61,7 +52,7 @@ const Users = () => {
         },
       })
       .then((res) => setUsers(res.data));
-  }, []);
+  }, [setUsers]);
 
   return (
     <Spring from={{ opacity: 0, marginLeft: -500 }} to={{ opacity: 1, marginLeft: 0 }}>
@@ -72,7 +63,7 @@ const Users = () => {
             <Table
               size="default"
               columns={columns}
-              dataSource={data}
+              dataSource={users}
               pagination={{ pageSize: 10 }}
             />
           </div>

@@ -6,6 +6,9 @@ const LoginContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   background: #153169;
+
+  @media screen and (min-width: 800px) {
+  }
 `;
 
 export default LoginContainer;
