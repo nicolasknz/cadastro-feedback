@@ -7,8 +7,8 @@ import FeedbackList from '../../pages/feedback-list';
 import NewFeedback from '../../pages/new-feedback';
 import Users from '../../pages/users';
 import Header from '../header';
-import LoginForm from '../login-form';
-import UserForm from '../user-form';
+import LoginForm from '../../pages/login-form';
+import UserForm from '../../pages/user-form';
 
 const Authenticator = () => {
   const [isAutheticated, setAuthentication] = useState(false);
